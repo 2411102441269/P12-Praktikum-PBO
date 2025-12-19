@@ -6,8 +6,9 @@ from ipk_validator import IpkValidator
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(levelname)s - %(message)s"
+    format='%(asctime)s %(levelname)s - %(name)s %(message)s'
 )
+LOGGER = logging.getLogger('RegistrationSystem')
 
 student = {
     "sks": 20,
@@ -26,5 +27,8 @@ validators = [
     IpkValidator()
 ]
 
-manager = ValidatorManager(validators)
-print(manager.validate(student, course))
+result = manager.validate(student, course)
+if result is None:
+    LOGGER.info("Pendaftaran Berhasil: Mahasiswa memenuhi semua syarat.") [cite: 57, 62]
+else:
+    LOGGER.warning(f"Pendaftaran Gagal: {result}") [cite: 64, 65]
